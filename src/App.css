@@ -36,3 +36,38 @@
     transform: rotate(360deg);
   }
 }
+
+.header button {
+  font-size: 22px;
+  background: rgba(70, 102, 154, 0.599);
+  color: white;
+  font-family: "Times New Roman", Times, serif;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  margin: 25px;
+}
+.header button:hover {
+  font-size: 22px;
+  background: rgba(70, 102, 154, 0.9);
+  transition: 0.6s ease;
+}
+
+.header .inputContainer input {
+  background: rgba(85, 92, 103, 0.1);
+  width: 300px;
+  height: 40px;
+  border: none;
+  margin: 50px;
+}
+
+.header .user_typing input {
+  background: rgba(85, 92, 103, 0.15);
+  width: 320px;
+  height: 50px;
+}
+.header .user_typing > * {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 23px;
+  color: rgb(69, 66, 66);
+}

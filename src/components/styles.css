@@ -1,0 +1,26 @@
+.task button {
+  font-size: 22px;
+  background: rgba(154, 70, 70, 0.599);
+  color: white;
+  font-family: "Times New Roman", Times, serif;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+}
+.task {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.task button:hover {
+  font-size: 22px;
+  background: rgb(178, 57, 57);
+  transition: 0.6s ease;
+}
+
+.todos {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}

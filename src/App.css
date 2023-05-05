@@ -63,6 +63,8 @@
 
 .header .user_typing input {
   background: rgba(85, 92, 103, 0.15);
+  /* border: 1px; */
+  /* border: 1px; */
   width: 320px;
   height: 50px;
 }

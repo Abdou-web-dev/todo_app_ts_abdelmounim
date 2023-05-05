@@ -1,0 +1,109 @@
+.todo-task-form-container {
+  .main-fieldset {
+    background: rgba(211, 211, 211, 0.2);
+    display: inline-flex;
+    gap: 30px;
+    align-items: center;
+    border: 0.5px solid gray;
+    padding: 20px 30px;
+    legend {
+      font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+      letter-spacing: 1.4px;
+      font-size: 20px;
+      padding: 0px 20px;
+    }
+    .main-checkbox {
+      order: 2;
+      transform: scale(1.4);
+    }
+    .single-todo-container {
+      order: 1;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      border: 1px solid lightgray;
+      padding: 10px 50px;
+
+      .todo-infos {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        .todo-name {
+          font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+            sans-serif;
+          letter-spacing: 1.4px;
+          font-size: 20px;
+        }
+        .todo-deadline {
+          font-style: italic;
+          font-size: 30px;
+          color: grey;
+        }
+      }
+      .delete-btn {
+        border: 0;
+        height: fit-content;
+        img {
+          width: 25px;
+        }
+      }
+    }
+  }
+  &.form-checked-true {
+    legend {
+      color: green;
+      font-weight: bold;
+    }
+  }
+  &.form-checked-false {
+    legend {
+      color: red;
+      font-weight: bold;
+    }
+  }
+}
+.ant-edit-modal {
+  .ant-modal-content {
+    .ant-modal-header {
+      .ant-modal-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .ant-edit-modal-close-btn {
+          border: none;
+          padding: 0;
+          width: 50px;
+          img {
+            width: 50px !important;
+            height: 50px !important;
+          }
+        }
+        span {
+          font-family: "open Sans";
+          letter-spacing: 2px;
+          font-weight: bold;
+          font-size: 22px;
+          color: grey;
+          border-bottom: 0.5px solid rgba(128, 128, 128, 0.332);
+        }
+      }
+    }
+
+    .ant-modal-body {
+    }
+  }
+}
+
+.todo-list-container {
+  // border: 1px solid red;
+  display: grid;
+  grid-template-columns: 40% 40%;
+  column-gap: 40px;
+  row-gap: 50px;
+  margin: 150px 0;
+  margin-left: 150px;
+  margin-top: 40px;
+}

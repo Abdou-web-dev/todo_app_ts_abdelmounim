@@ -1,52 +1,95 @@
-import { ChangeEvent, useState } from "react";
+import { message } from "antd";
+import { ChangeEvent, useEffect, useState } from "react";
 import "./App.css";
-import { TodoList } from "./components/TodoList";
-
 import { Todo } from "./Interfaces";
+import { TodoList } from "./components/TodoList";
+import { DeadLineInput } from "./components/inputs/DeadLineInput";
+import { TaskNameInput } from "./components/inputs/TaskNameInput";
 
 const App = () => {
-  const [task, setTask] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [taskName, setTaskName] = useState<string>("");
+  const [isTaskDone, setIsTaskDone] = useState<boolean>();
+  const [deadLine, setdeadLine] = useState<number>();
+  //
+  const [taskClass, setTaskClass] = useState<string>("");
+  const [deadLineClass, setDeadLineClass] = useState<string>("");
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.name === "task") {
-      setTask(event.target.value);
+      setTaskName(event.target.value);
+    } else if (event.target.name === "date") {
+      setdeadLine(Number(event.target.value));
     }
   };
 
   const addTask = (): void => {
-    if (task) {
-      const newTask: Todo = {
-        taskName: task,
+    if (taskName && deadLine) {
+      const newTodo: Todo = {
+        todo_taskName: taskName,
+        todo_deadline: deadLine,
+        is_task_done: isTaskDone,
       };
-      setTodos([...todos, newTask]);
-      setTask("");
+      setTodos([...todos, newTodo]);
+      setTaskName("");
+      setdeadLine(0);
+    }
+    // frontend validation of the fields
+    if (!taskName && !deadLine) {
+      message.warning(`Please, fill both of the fields above !`, 1);
+    }
+    if (!taskName && deadLine) {
+      message.warning(`Please, give your task a name !`, 1);
+    }
+    if (taskName && !deadLine) {
+      message.warning(`Please, give your task a deadline !`, 1);
+    }
+
+    if (!taskName) {
+      setTaskClass(`no_task_name_entered`);
+    } else {
+      setTaskClass(``);
+    }
+    if (!deadLine) {
+      setDeadLineClass(`no_task_deadline_entered`);
+    } else {
+      setDeadLineClass("");
     }
   };
 
-  const completeTask = (taskNameToDelete: string): void => {
-    let newTodos = todos.filter((task) => {
-      return task.taskName != taskNameToDelete;
+  const deleteTask = (todo_name_to_be_deleted: string): void => {
+    let newTodosList: Todo[] = todos.filter((todo) => {
+      let isDeleted: boolean = todo.todo_taskName != todo_name_to_be_deleted;
+      return isDeleted;
     });
-    setTodos(newTodos);
+    setTodos(newTodosList);
   };
+
+  // making sure the todo list is empty.
+  //when the app first loads
+  useEffect(() => {
+    setTodos([]);
+  }, []);
 
   return (
     <div className="App">
       <div className="header">
-        <div className={task ? "inputContainer user_typing" : "inputContainer"}>
-          <input
-            type="text"
-            placeholder="Add a task..."
-            name="task"
-            value={task}
-            onChange={handleChange}
-          />
+        <div
+          className={taskName ? "inputContainer user_typing" : "inputContainer"}
+        >
+          <TaskNameInput
+            {...{ handleInputChange, taskClass, taskName }}
+          ></TaskNameInput>
+          <DeadLineInput {...{ deadLine, deadLineClass, handleInputChange }} />
         </div>
         <button onClick={addTask}>Add Task</button>
       </div>
       <div className="todoList">
-        <TodoList todos={todos} completeTask={completeTask}></TodoList>
+        <TodoList
+          {...{ isTaskDone, setIsTaskDone }}
+          todos={todos}
+          completeTask={deleteTask}
+        ></TodoList>
       </div>
     </div>
   );

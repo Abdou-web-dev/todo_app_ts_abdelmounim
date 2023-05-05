@@ -1,0 +1,10 @@
+.task_name_input {
+  &.no_task_name_entered {
+    border: 1.5px solid rgba(255, 0, 0, 0.33) !important;
+  }
+}
+.deadline_input {
+  &.no_task_deadline_entered {
+    border: 1.5px solid rgba(255, 0, 0, 0.33) !important;
+  }
+}
